@@ -1,0 +1,20 @@
+name: Lint Dockerfiles
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+      - "**/Dockerfile"
+permissions:
+  pull-requests: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container: hadolint/hadolint:latest-debian
+    steps:
+    - uses: actions/checkout@v4
+    - name: hadolint
+      run: hadolint **/Dockerfile
+       
