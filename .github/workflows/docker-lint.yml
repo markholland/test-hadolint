@@ -27,6 +27,8 @@ jobs:
           echo ${ALL_CHANGED_FILES}
       - name: hadolint
         uses: jbergstroem/hadolint-gh-action@v1
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         with:
-          dockerfile: "**/Dockerfile"
+          dockerfile: $ALL_CHANGED_FILES
        
