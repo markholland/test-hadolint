@@ -11,22 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container: hadolint/hadolint:latest-debian
     steps:
-      - name: Install git
-        run: apt-get update && apt-get install -y git --no-install-recommends
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v45
-        with:
-          files: |
-            **/Dockerfile
-      - name: List all changed files
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          for file in ${ALL_CHANGED_FILES}; do
-            echo "$file was changed"
-          done
-          echo ${ALL_CHANGED_FILES}
+      - uses: actions/checkout@v4
       - name: hadolint
-        run: hadolint my-module/Dockerfile other-module/Dockerfile
+        run: hadolint **/Dockerfile
        
