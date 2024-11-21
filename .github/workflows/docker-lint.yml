@@ -24,11 +24,8 @@ jobs:
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
           done
-          echo ${ALL_CHANGED_FILES}
       - name: hadolint
         uses: jbergstroem/hadolint-gh-action@v1
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         with:
-          dockerfile: $ALL_CHANGED_FILES
+          dockerfile: ${{ steps.changed-files.outputs.all_changed_files }}
        
